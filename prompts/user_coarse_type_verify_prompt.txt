@@ -1,0 +1,2 @@
+The given sentence: [Sentence]
+Is the word "[Entity]" in the given sentence a [Entity Type] entity? Please answer with "yes" or "no".

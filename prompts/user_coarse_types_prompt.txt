@@ -1,0 +1,2 @@
+The given sentence: [Sentence]
+The entity Type: [Entity Type]

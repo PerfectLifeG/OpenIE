@@ -1,0 +1,963 @@
+[
+  {
+    "id": "0",
+    "source": "New-York-Times-RE",
+    "sentence": "Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .",
+    "coarse_types": [
+      "location",
+      "food"
+    ],
+    "entities": [
+      {
+        "name": "Montana",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Montana",
+        "coarse_type": "food"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "food"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "food"
+      }
+    ],
+    "verification": [
+      {
+        "name": "Montana",
+        "coarse_type": "location",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "location",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "location",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Montana",
+        "coarse_type": "food",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "food",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "food",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "Montana",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "location"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "Montana",
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a location entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nIs the word \"Montana\" in the given sentence a location entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a location entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nIs the word \"Michigan\" in the given sentence a location entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a location entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nIs the word \"Florida\" in the given sentence a location entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Montana",
+        "coarse_type": "food",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a food entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nIs the word \"Montana\" in the given sentence a food entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "food",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a food entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nIs the word \"Michigan\" in the given sentence a food entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "food",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a food entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nIs the word \"Florida\" in the given sentence a food entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "source": "DuIE2.0",
+    "sentence": "《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网",
+    "coarse_types": [
+      "组织机构",
+      "医学",
+      "事件"
+    ],
+    "entities": [
+      {
+        "name": "网络写手凰然若梦",
+        "coarse_type": "组织机构"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "组织机构"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "医学"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "事件"
+      }
+    ],
+    "verification": [
+      {
+        "name": "网络写手凰然若梦",
+        "coarse_type": "组织机构",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "组织机构",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "医学",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "事件",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "起点中文网",
+        "coarse_type": "组织机构"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "网络写手凰然若梦",
+        "coarse_type": "组织机构",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 组织机构 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nIs the word \"网络写手凰然若梦\" in the given sentence a 组织机构 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "组织机构",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 组织机构 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nIs the word \"起点中文网\" in the given sentence a 组织机构 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "医学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 医学 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nIs the word \"起点中文网\" in the given sentence a 医学 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "事件",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 事件 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nIs the word \"起点中文网\" in the given sentence a 事件 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "source": "New-York-Times-RE",
+    "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
+    "coarse_types": [
+      "organization",
+      "location",
+      "medicine",
+      "mathematics"
+    ],
+    "entities": [
+      {
+        "name": "Bushwick",
+        "coarse_type": "organization"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "organization"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "medicine"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "medicine"
+      }
+    ],
+    "verification": [
+      {
+        "name": "Bushwick",
+        "coarse_type": "organization",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "organization",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "location",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "location",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "medicine",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "medicine",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "Bushwick",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "location"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "Bushwick",
+        "coarse_type": "organization",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a organization entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nIs the word \"Bushwick\" in the given sentence a organization entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "organization",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a organization entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nIs the word \"Brooklyn\" in the given sentence a organization entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a location entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nIs the word \"Bushwick\" in the given sentence a location entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a location entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nIs the word \"Brooklyn\" in the given sentence a location entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "medicine",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a medicine entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nIs the word \"Bushwick\" in the given sentence a medicine entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "medicine",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a medicine entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nIs the word \"Brooklyn\" in the given sentence a medicine entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "source": "DuIE2.0",
+    "sentence": "杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队",
+    "coarse_types": [
+      "人",
+      "产品",
+      "位置",
+      "时间",
+      "组织机构"
+    ],
+    "entities": [
+      {
+        "name": "Jerryd Bayless",
+        "coarse_type": "人"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "产品"
+      },
+      {
+        "name": "亚利桑那州",
+        "coarse_type": "位置"
+      },
+      {
+        "name": "1988年8月20日",
+        "coarse_type": "时间"
+      },
+      {
+        "name": "菲尼克斯",
+        "coarse_type": "组织机构"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "组织机构"
+      }
+    ],
+    "verification": [
+      {
+        "name": "Jerryd Bayless",
+        "coarse_type": "人",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "产品",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "亚利桑那州",
+        "coarse_type": "位置",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "1988年8月20日",
+        "coarse_type": "时间",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "菲尼克斯",
+        "coarse_type": "组织机构",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "组织机构",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "Jerryd Bayless",
+        "coarse_type": "人"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "产品"
+      },
+      {
+        "name": "亚利桑那州",
+        "coarse_type": "位置"
+      },
+      {
+        "name": "1988年8月20日",
+        "coarse_type": "时间"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "组织机构"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "Jerryd Bayless",
+        "coarse_type": "人",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 人 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nIs the word \"Jerryd Bayless\" in the given sentence a 人 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "产品",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 产品 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nIs the word \"费城76人队\" in the given sentence a 产品 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "亚利桑那州",
+        "coarse_type": "位置",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 位置 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nIs the word \"亚利桑那州\" in the given sentence a 位置 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "1988年8月20日",
+        "coarse_type": "时间",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 时间 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nIs the word \"1988年8月20日\" in the given sentence a 时间 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "菲尼克斯",
+        "coarse_type": "组织机构",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 组织机构 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nIs the word \"菲尼克斯\" in the given sentence a 组织机构 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "组织机构",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 组织机构 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nIs the word \"费城76人队\" in the given sentence a 组织机构 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "source": "New-York-Times-RE",
+    "sentence": "By virtue of cautious , patient reporting , Fallows anticipated some of the Iraq war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .",
+    "coarse_types": [
+      "music",
+      "location"
+    ],
+    "entities": [
+      {
+        "name": "Iraq",
+        "coarse_type": "location"
+      }
+    ],
+    "verification": [
+      {
+        "name": "Iraq",
+        "coarse_type": "location",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "Iraq",
+        "coarse_type": "location"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "Iraq",
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a location entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: By virtue of cautious , patient reporting , Fallows anticipated some of the Iraq war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .\nIs the word \"Iraq\" in the given sentence a location entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "source": "DuIE2.0",
+    "sentence": "本书是美国电影《消失的女孩》的同名小说，由百花洲文艺出版社出版，作者是美国作家柯熙·卓安",
+    "coarse_types": [
+      "产品"
+    ],
+    "entities": [
+      {
+        "name": "柯熙·卓安",
+        "coarse_type": "产品"
+      }
+    ],
+    "verification": [
+      {
+        "name": "柯熙·卓安",
+        "coarse_type": "产品",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ],
+    "verified_entities": [],
+    "prompts_and_answers": [
+      {
+        "name": "柯熙·卓安",
+        "coarse_type": "产品",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 产品 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 本书是美国电影《消失的女孩》的同名小说，由百花洲文艺出版社出版，作者是美国作家柯熙·卓安\nIs the word \"柯熙·卓安\" in the given sentence a 产品 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "source": "DuIE2.0",
+    "sentence": "NO.8我在故宫修文物作者: 萧寒 主编 / 绿妖 撰稿 / 严明 摄影出版社: 新经典文化/广西师范大学出版社出版年: 2017-1页数: 276定价: 48.00元装帧: 平装ISBN: 9787549590353豆瓣评分8.1内容简介 · · · · · ·《我在故宫修文物》第一次将镜头对准了故宫的文物修复师们，他们已经存在了几百年，却始终不为人知",
+    "coarse_types": [
+      "位置"
+    ],
+    "entities": [
+      {
+        "name": "故宫",
+        "coarse_type": "位置"
+      }
+    ],
+    "verification": [
+      {
+        "name": "故宫",
+        "coarse_type": "位置",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "故宫",
+        "coarse_type": "位置"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "故宫",
+        "coarse_type": "位置",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 位置 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: NO.8我在故宫修文物作者: 萧寒 主编 / 绿妖 撰稿 / 严明 摄影出版社: 新经典文化/广西师范大学出版社出版年: 2017-1页数: 276定价: 48.00元装帧: 平装ISBN: 9787549590353豆瓣评分8.1内容简介 · · · · · ·《我在故宫修文物》第一次将镜头对准了故宫的文物修复师们，他们已经存在了几百年，却始终不为人知\nIs the word \"故宫\" in the given sentence a 位置 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "source": "semval-RE",
+    "sentence": "over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .",
+    "coarse_types": [
+      "biology",
+      "science",
+      "person",
+      "pedagogy",
+      "mathematics"
+    ],
+    "entities": [
+      {
+        "name": "los gazquez",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "peregrines",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "choughs",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "science"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "person"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "pedagogy"
+      }
+    ],
+    "verification": [
+      {
+        "name": "los gazquez",
+        "coarse_type": "biology",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "peregrines",
+        "coarse_type": "biology",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "choughs",
+        "coarse_type": "biology",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "science",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "person",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "pedagogy",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "peregrines",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "choughs",
+        "coarse_type": "biology"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "los gazquez",
+        "coarse_type": "biology",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a biology entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nIs the word \"los gazquez\" in the given sentence a biology entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "peregrines",
+        "coarse_type": "biology",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a biology entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nIs the word \"peregrines\" in the given sentence a biology entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "choughs",
+        "coarse_type": "biology",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a biology entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nIs the word \"choughs\" in the given sentence a biology entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "science",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a science entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nIs the word \"los gazquez\" in the given sentence a science entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "person",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a person entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nIs the word \"los gazquez\" in the given sentence a person entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "pedagogy",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a pedagogy entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nIs the word \"los gazquez\" in the given sentence a pedagogy entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "source": "kbp37",
+    "sentence": "Eden Park Northern Lodge  is  NMIT  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .",
+    "coarse_types": [
+      "organization",
+      "food"
+    ],
+    "entities": [
+      {
+        "name": "NMIT",
+        "coarse_type": "organization"
+      }
+    ],
+    "verification": [
+      {
+        "name": "NMIT",
+        "coarse_type": "organization",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "NMIT",
+        "coarse_type": "organization"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "NMIT",
+        "coarse_type": "organization",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a organization entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: Eden Park Northern Lodge  is  NMIT  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .\nIs the word \"NMIT\" in the given sentence a organization entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "source": "DuIE2.0",
+    "sentence": "版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69",
+    "coarse_types": [
+      "事件",
+      "生物",
+      "时间",
+      "文学",
+      "人",
+      "医学"
+    ],
+    "entities": [
+      {
+        "name": "陈献章集",
+        "coarse_type": "事件"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "事件"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "生物"
+      },
+      {
+        "name": "1987",
+        "coarse_type": "时间"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "文学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "文学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "人"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "医学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "医学"
+      }
+    ],
+    "verification": [
+      {
+        "name": "陈献章集",
+        "coarse_type": "事件",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "事件",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "生物",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "1987",
+        "coarse_type": "时间",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "文学",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "文学",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "人",
+        "is_valid": true,
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "医学",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "医学",
+        "is_valid": false,
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ],
+    "verified_entities": [
+      {
+        "name": "陈献章",
+        "coarse_type": "生物"
+      },
+      {
+        "name": "1987",
+        "coarse_type": "时间"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "文学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "文学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "人"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "name": "陈献章集",
+        "coarse_type": "事件",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 事件 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章集\" in the given sentence a 事件 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "事件",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 事件 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章\" in the given sentence a 事件 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "生物",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 生物 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章\" in the given sentence a 生物 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "1987",
+        "coarse_type": "时间",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 时间 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"1987\" in the given sentence a 时间 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "文学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 文学 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章集\" in the given sentence a 文学 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "文学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 文学 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章\" in the given sentence a 文学 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "人",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 人 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章\" in the given sentence a 人 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"yes\"}"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "医学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 医学 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章集\" in the given sentence a 医学 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "医学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text\nTask:\n- You will be given a sentence.\n- You will be asked whether the word is a 医学 entity extracted from the given sentence.\n- Your goal is to answer the question with only one word which is \"yes\" or \"no\".\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the exact answer with only one word which is \"yes\" or \"no\".\nRequirements:\n- Do not output anything else.\n- You can not return null, empty, or other words.\n\nBelow are some examples:\nInput:\nThe given sentence: Only France and Britan backed Fischier's proposal.\nIs the word \"France\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}\n\nInput:\nThe given sentence: It brought in 4,275 tonnes of British mutton, some 10 percent of overall imports.\nIs the word \"British\" in the given sentence a Location entity? Please answer with yes or no.\nOutput:\n{\"answer\": \"no\"}\n\nInput:\nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nIs the word \"Oregon\" in the given sentence a Location entity? Please answer with yes or no.\nOutput: \n{\"answer\": \"yes\"}",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nIs the word \"陈献章\" in the given sentence a 医学 entity? Please answer with \"yes\" or \"no\".",
+        "llm_answer": "{\"answer\": \"no\"}"
+      }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+You are an intelligent named entity recognition assistant for both Chinese and English text.
+Task:
+- You will be given a sentence and a entity type.
+- Label the entities of the given entity type in the sentence.
+Output format:
+- The output must be valid JSON.
+- "answer": the sentence with the entities of the given entity type replaced by @@[Entity]##.
+Requirements:
+- If there is no entity of the given entity type in the sentence, respond with the original sentence.
+
+Below are some examples:
+
+Input: 
+The given sentence: Columbus is a sailor.
+The entity type: city
+Output: 
+{"answer": "Columbus is a sailor."}
+
+Input: 
+The given sentence: Columbus is a city.
+The entity type: city
+Output: 
+{"answer": "@@Columbus## is a city."}
+
+Input: 
+The given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .
+The entity type: location
+Output: 
+{"answer": "It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households ."}
+

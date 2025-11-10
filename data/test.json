@@ -1,0 +1,29 @@
+[
+  {
+    "source": "New-York-Times-RE",
+    "sentence": "There 's a victim consciousness , '' said Marilee Jones , the dean of admissions at Massachusetts Institute of Technology in Cambridge . ''",
+    "schema": [
+      "country of capital",
+      "location contains"
+    ],
+    "coarse_types": [
+      "organization",
+      "location"
+    ],
+    "output": [
+      {
+        "subject": [
+          "Cambridge",
+          "location",
+          "city"
+        ],
+        "relationship": "location contains",
+        "object": [
+          "Massachusetts Institute of Technology",
+          "organization",
+          "educational institution"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,493 @@
+[
+  {
+    "id": "0",
+    "source": "New-York-Times-RE",
+    "sentence": "Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .",
+    "coarse_types": [
+      "location",
+      "food"
+    ],
+    "entities": [
+      {
+        "name": "Montana",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Montana",
+        "coarse_type": "food"
+      },
+      {
+        "name": "Michigan",
+        "coarse_type": "food"
+      },
+      {
+        "name": "Florida",
+        "coarse_type": "food"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nThe entity Type: location",
+        "llm_answer": "{\"answer\": \"Set in @@Montana##, @@Michigan##, and @@Florida##, Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\"}"
+      },
+      {
+        "coarse_type": "food",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: Set in Montana , Michigan and Florida , Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\nThe entity Type: food",
+        "llm_answer": "{\"answer\": \"Set in @@Montana##, @@Michigan##, and @@Florida##, Thomas McGuane 's first collection of short fiction in nearly 20 years is populated by misfits and seekers whose destinies are profoundly shaped -- and often confined -- by the places they inhabit .\"}"
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "source": "DuIE2.0",
+    "sentence": "《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网",
+    "coarse_types": [
+      "组织机构",
+      "医学",
+      "事件"
+    ],
+    "entities": [
+      {
+        "name": "网络写手凰然若梦",
+        "coarse_type": "组织机构"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "组织机构"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "医学"
+      },
+      {
+        "name": "起点中文网",
+        "coarse_type": "事件"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "组织机构",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nThe entity Type: 组织机构",
+        "llm_answer": "{\"answer\": \"《未来修途》是由@@网络写手凰然若梦##所写的一部小说，连载于@@起点中文网##\"}"
+      },
+      {
+        "coarse_type": "医学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nThe entity Type: 医学",
+        "llm_answer": "{\"answer\": \"《未来修途》是由网络写手凰然若梦所写的一部小说，连载于@@起点中文网##\"}"
+      },
+      {
+        "coarse_type": "事件",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 《未来修途》是由网络写手凰然若梦所写的一部小说，连载于起点中文网\nThe entity Type: 事件",
+        "llm_answer": "{\"answer\": \"_《未来修途》是由网络写手凰然若梦所写的一部小说，连载于@@起点中文网##\"}"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "source": "New-York-Times-RE",
+    "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
+    "coarse_types": [
+      "organization",
+      "location",
+      "medicine",
+      "mathematics"
+    ],
+    "entities": [
+      {
+        "name": "Bushwick",
+        "coarse_type": "organization"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "organization"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "location"
+      },
+      {
+        "name": "Bushwick",
+        "coarse_type": "medicine"
+      },
+      {
+        "name": "Brooklyn",
+        "coarse_type": "medicine"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "organization",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nThe entity Type: organization",
+        "llm_answer": "{\"answer\": \"They and Mr. Jara shared a cramped railroad-style apartment in the @@Bushwick## neighborhood of @@Brooklyn##.\"}"
+      },
+      {
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nThe entity Type: location",
+        "llm_answer": "{\"answer\": \"They and Mr. Jara shared a cramped railroad-style apartment in the @@Bushwick## of @@Brooklyn##.\"}"
+      },
+      {
+        "coarse_type": "medicine",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nThe entity Type: medicine",
+        "llm_answer": "{\"answer\": \"They and Mr. Jara shared a cramped railroad-style apartment in the @@Bushwick## of @@Brooklyn##.\"}"
+      },
+      {
+        "coarse_type": "mathematics",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .\nThe entity Type: mathematics",
+        "llm_answer": "{\"answer\": \"They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn.\"}"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "source": "DuIE2.0",
+    "sentence": "杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队",
+    "coarse_types": [
+      "人",
+      "产品",
+      "位置",
+      "时间",
+      "组织机构"
+    ],
+    "entities": [
+      {
+        "name": "Jerryd Bayless",
+        "coarse_type": "人"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "产品"
+      },
+      {
+        "name": "亚利桑那州",
+        "coarse_type": "位置"
+      },
+      {
+        "name": "1988年8月20日",
+        "coarse_type": "时间"
+      },
+      {
+        "name": "菲尼克斯",
+        "coarse_type": "组织机构"
+      },
+      {
+        "name": "费城76人队",
+        "coarse_type": "组织机构"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "人",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nThe entity Type: 人",
+        "llm_answer": "{\"answer\": \"杰里·贝勒斯（@@Jerryd Bayless##），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\"}"
+      },
+      {
+        "coarse_type": "产品",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nThe entity Type: 产品",
+        "llm_answer": "{\"answer\": \"杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA@@费城76人队##\"}"
+      },
+      {
+        "coarse_type": "位置",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nThe entity Type: 位置",
+        "llm_answer": "{\"answer\": \"杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国@@亚利桑那州##（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\"}"
+      },
+      {
+        "coarse_type": "时间",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nThe entity Type: 时间",
+        "llm_answer": "{\"answer\": \" 杰里·贝勒斯（Jerryd Bayless），@@1988年8月20日##出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\"}"
+      },
+      {
+        "coarse_type": "组织机构",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队\nThe entity Type: 组织机构",
+        "llm_answer": "{\"answer\": \" 杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国@@菲尼克斯##州，美国职业篮球运动员，司职后卫，效力于NBA@@费城76人队##\"}"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "source": "New-York-Times-RE",
+    "sentence": "By virtue of cautious , patient reporting , Fallows anticipated some of the Iraq war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .",
+    "coarse_types": [
+      "music",
+      "location"
+    ],
+    "entities": [
+      {
+        "name": "Iraq",
+        "coarse_type": "location"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "music",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: By virtue of cautious , patient reporting , Fallows anticipated some of the Iraq war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .\nThe entity Type: music",
+        "llm_answer": "{\"answer\": \"By virtue of cautious , patient reporting , Fallows anticipated some of the Iraq war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .\"}"
+      },
+      {
+        "coarse_type": "location",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: By virtue of cautious , patient reporting , Fallows anticipated some of the Iraq war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .\nThe entity Type: location",
+        "llm_answer": "{\"answer\": \"By virtue of cautious , patient reporting , Fallows anticipated some of the  @@Iraq##  war 's missteps , and if the articles in '' Blind Into Baghdad '' seem to arrive at what is now the conventional wisdom , he got there before the journalistic pack .\"}"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "source": "DuIE2.0",
+    "sentence": "本书是美国电影《消失的女孩》的同名小说，由百花洲文艺出版社出版，作者是美国作家柯熙·卓安",
+    "coarse_types": [
+      "产品"
+    ],
+    "entities": [
+      {
+        "name": "柯熙·卓安",
+        "coarse_type": "产品"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "产品",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 本书是美国电影《消失的女孩》的同名小说，由百花洲文艺出版社出版，作者是美国作家柯熙·卓安\nThe entity Type: 产品",
+        "llm_answer": "{\"answer\": \"本书是美国电影《消失的女孩》的同名小说，由百花洲文艺出版社出版，作者是美国作家@@柯熙·卓安##\"}"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "source": "DuIE2.0",
+    "sentence": "NO.8我在故宫修文物作者: 萧寒 主编 / 绿妖 撰稿 / 严明 摄影出版社: 新经典文化/广西师范大学出版社出版年: 2017-1页数: 276定价: 48.00元装帧: 平装ISBN: 9787549590353豆瓣评分8.1内容简介 · · · · · ·《我在故宫修文物》第一次将镜头对准了故宫的文物修复师们，他们已经存在了几百年，却始终不为人知",
+    "coarse_types": [
+      "位置"
+    ],
+    "entities": [
+      {
+        "name": "故宫",
+        "coarse_type": "位置"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "位置",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: NO.8我在故宫修文物作者: 萧寒 主编 / 绿妖 撰稿 / 严明 摄影出版社: 新经典文化/广西师范大学出版社出版年: 2017-1页数: 276定价: 48.00元装帧: 平装ISBN: 9787549590353豆瓣评分8.1内容简介 · · · · · ·《我在故宫修文物》第一次将镜头对准了故宫的文物修复师们，他们已经存在了几百年，却始终不为人知\nThe entity Type: 位置",
+        "llm_answer": "{\"answer\": \"NO.8我在@@故宫##修文物作者: 萧寒 主编 / 绿妖 撰稿 / 严明 摄影出版社: 新经典文化/广西师范大学出版社出版年: 2017-1页数: 276定价: 48.00元装帧: 平装ISBN: 9787549590353豆瓣评分8.1内容简介 · · · · · ·《我在故宫修文物》第一次将镜头对准了故宫的文物修复师们，他们已经存在了几百年，却始终不为人知\"}"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "source": "semval-RE",
+    "sentence": "over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .",
+    "coarse_types": [
+      "biology",
+      "science",
+      "person",
+      "pedagogy",
+      "mathematics"
+    ],
+    "entities": [
+      {
+        "name": "los gazquez",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "peregrines",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "choughs",
+        "coarse_type": "biology"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "science"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "person"
+      },
+      {
+        "name": "los gazquez",
+        "coarse_type": "pedagogy"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "biology",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nThe entity Type: biology",
+        "llm_answer": "{\"answer\": \"over the sierras from @@los gazquez## , passing the peaks of limestone , the cliffs where the @@peregrines## battle for purchase , the clattering of @@choughs## tumble to cave mouths .\"}"
+      },
+      {
+        "coarse_type": "science",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nThe entity Type: science",
+        "llm_answer": "{\"answer\": \"over the sierras from @@los gazquez## , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\"}"
+      },
+      {
+        "coarse_type": "person",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nThe entity Type: person",
+        "llm_answer": "{\"answer\": \"over the sierras from @@los gazquez##, passing the peaks of limestone, the cliffs where the peregrines battle for purchase, the clattering of choughs tumble to cave mouths.\"}"
+      },
+      {
+        "coarse_type": "pedagogy",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nThe entity Type: pedagogy",
+        "llm_answer": "{\"answer\": \"over the sierras from @@los gazquez##, passing the peaks of limestone, the cliffs where the peregrines battle for purchase, the clattering of choughs tumble to cave mouths.\"}"
+      },
+      {
+        "coarse_type": "mathematics",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\nThe entity Type: mathematics",
+        "llm_answer": "{\"answer\": \"over the sierras from los gazquez , passing the peaks of limestone , the cliffs where the peregrines battle for purchase , the clattering of choughs tumble to cave mouths .\"}"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "source": "kbp37",
+    "sentence": "Eden Park Northern Lodge  is  NMIT  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .",
+    "coarse_types": [
+      "organization",
+      "food"
+    ],
+    "entities": [
+      {
+        "name": "NMIT",
+        "coarse_type": "organization"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "organization",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: Eden Park Northern Lodge  is  NMIT  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .\nThe entity Type: organization",
+        "llm_answer": "{\"answer\": \"Eden Park Northern Lodge  is  @@NMIT##  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .\" }"
+      },
+      {
+        "coarse_type": "food",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: Eden Park Northern Lodge  is  NMIT  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .\nThe entity Type: food",
+        "llm_answer": "{\"answer\": \"Eden Park Northern Lodge  is  NMIT  's 320 hectare farm and horse stud at Eden Park located 40 kilometres north of Melbourne in the foothills of Victoria's Great Dividing Range .\"}"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "source": "DuIE2.0",
+    "sentence": "版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69",
+    "coarse_types": [
+      "事件",
+      "生物",
+      "时间",
+      "文学",
+      "人",
+      "医学"
+    ],
+    "entities": [
+      {
+        "name": "陈献章集",
+        "coarse_type": "事件"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "事件"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "生物"
+      },
+      {
+        "name": "1987",
+        "coarse_type": "时间"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "文学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "文学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "人"
+      },
+      {
+        "name": "陈献章集",
+        "coarse_type": "医学"
+      },
+      {
+        "name": "陈献章",
+        "coarse_type": "医学"
+      }
+    ],
+    "prompts_and_answers": [
+      {
+        "coarse_type": "事件",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nThe entity Type: 事件",
+        "llm_answer": "{\"answer\": \"版权信息书 名: @@陈献章集##  作　者：(明代)@@陈献章##  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\"}"
+      },
+      {
+        "coarse_type": "生物",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nThe entity Type: 生物",
+        "llm_answer": "{\"answer\": \"版权信息书 名: @@陈献章## 集  作　者：(明代)@@陈献章##  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\"}"
+      },
+      {
+        "coarse_type": "时间",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nThe entity Type: 时间",
+        "llm_answer": "{\"answer\": \" 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间：  @@1987##  ISBN: 9787101002553  开本： 32  定价: 69\"}"
+      },
+      {
+        "coarse_type": "文学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nThe entity Type: 文学",
+        "llm_answer": "{\"answer\": \" 版权信息书 名: @@陈献章集##  作　者：(明代)@@陈献章##  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\"}"
+      },
+      {
+        "coarse_type": "人",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nThe entity Type: 人",
+        "llm_answer": "{\"answer\": \" 版权信息书 名: @@陈献章## 集  作　者：(明代)@@陈献章##  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\"}"
+      },
+      {
+        "coarse_type": "医学",
+        "system_prompt": "You are an intelligent named entity recognition assistant for both Chinese and English text.\nTask:\n- You will be given a sentence and a entity type.\n- Label the entities of the given entity type in the sentence.\nOutput format:\n- The output must be valid JSON.\n- \"answer\": the sentence with the entities of the given entity type replaced by @@[Entity]##.\nRequirements:\n- If there is no entity of the given entity type in the sentence, respond with the original sentence.\n\nBelow are some examples:\n\nInput: \nThe given sentence: Columbus is a sailor.\nThe entity type: city\nOutput: \n{\"answer\": \"Columbus is a sailor.\"}\n\nInput: \nThe given sentence: Columbus is a city.\nThe entity type: city\nOutput: \n{\"answer\": \"@@Columbus## is a city.\"}\n\nInput: \nThe given sentence: It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  Oregon  providing some 325 Megawatts of power enough for approximately households .\nThe entity type: location\nOutput: \n{\"answer\": \"It said it will sell 141 wind turbines to the  Portland General Electric  Co. which will complete the Biglow Canyon wind farm project in  @@Oregon##  providing some 325 Megawatts of power enough for approximately households .\"}\n\n",
+        "user_prompt": "The given sentence: 版权信息书 名: 陈献章集  作　者：(明代)陈献章  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\nThe entity Type: 医学",
+        "llm_answer": "{\"answer\": \" 版权信息书 名: @@陈献章集##  作　者：(明代)@@陈献章##  出版社： 中华书局  出版时间： 1987  ISBN: 9787101002553  开本： 32  定价: 69\"}"
+      }
+    ]
+  }
+]

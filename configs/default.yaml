@@ -1,0 +1,87 @@
+# 说明：主配置文件。可通过 --config 指定其他 yaml。
+project:
+  name: ccf-ner
+  seed: 2025
+  overwrite_outputs: true       # 若存在同名文件，直接覆盖
+  recursive_find_files: true    # 递归寻找数据文件
+
+paths:
+  data_dir: "./data"
+  output_dir: "./outputs"
+  prompt_dir: "./prompts"
+  ontology_dir: "./ontology"
+  index_dir: "./indexes" 
+  dev_pred_path: "./outputs/dev_predictions.json"
+  dev_self_verify_path: "./outputs/dev_self_verify.json"
+  test_pred_path: "./outputs/test_predictions.json"
+  test_self_verify_path: "./outputs/test_self_verify.json"
+
+runtime:
+  mode: "inference"             # "train"(若后续接轻微调) / "inference"
+  max_examples: 10         # 调试可设小数目
+
+llm:
+  # provider: "openai"
+  # base_url: "http://127.0.0.1:8000"
+  # model: "/home/data/Qwen2.5-7B-Instruct"
+
+  provider: "ollama"
+  base_url: "http://127.0.0.1:11434"
+  model: "Llama3-8B"
+  
+  temperature: 0.0
+  response_format: "json_object"
+  max_tokens: 2048
+  retry: 3
+  timeout: 60
+  alias_map:
+    Llama3-8B: "llama3:8b"
+    Llama3-8B-Instruct: "llama3:8b-instruct"
+    Llama3.1-8B: "llama3.1:8b"
+    Llama3.1-8B-Instruct: "llama3.1:8b-instruct"
+    Qwen2.5-7B-Instruct: "/home/data/Qwen2.5-7B-Instruct"
+    qwen3-4B-instruct: "Qwen/Qwen3-4B-Instruct-2507"
+    
+  allowed_models:
+    - "Llama3-8B"
+    - "Llama3-8B-Instruct"
+    - "LLama3.1-8B"
+    - "LLama3.1-8B-Instruct"
+    - "qwen2.5-7B-Instruct"
+    - "qwen3-4B-instruct"
+  case_sensitive: false
+
+
+retriever:
+  method: "hybrid"                   # "bm25" | "dense" | "hybrid"
+  topk: 8                            # 首轮召回个数
+  rerank:
+    enable: true
+    topk: 4                          # 重排后保留
+    method: "cosine"                 # 非 LLM 重排，避免触犯赛规
+  chunk:
+    max_chars: 240                   # 切块大小（字符）
+    stride: 60                       # 重叠跨度
+  bm25:
+    k1: 1.2
+    b: 0.75
+    stopwords: ["的","了","和","是","在","to","of","the","and"]
+  dense:
+    embedder: "hashing"              # 占位：hashing | sentence-transformers | custom
+    dim: 384                         # hashing 占位维度
+    norm: true
+  score_mix:
+    alpha: 0.6                       # hybrid 融合系数：alpha*BM25 + (1-alpha)*dense
+    
+extraction:
+  enforce_quote_from_text: true  # 幻觉抑制：命名实体必须原文可对齐
+  allow_unknown_fine_type: true  # 未知类型允许输出并映射到本体
+  use_bilingual_prompts: true
+  fewshot_k: 4
+  entity_markers:
+    - begin: "@@"
+      end: "##"
+
+evaluation:
+  strict_span_match: true        # 严格字符级 span（可改为 token 级）
+  report_by_type: true
