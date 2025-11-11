@@ -27,12 +27,11 @@ from tqdm import tqdm
 
 def extractor(dataset:str,mode,temp,tp):
     if mode == 1:
-        llm_name = '/home/penglin.ge/data/llama_factory/model/entity2-Qwen2.5-7B-Instruct'
-        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/output3'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model1'
     elif mode == 2:
-        llm_name = '/home/penglin.ge/data/llama_factory/model/coarse2-Qwen2.5-7B-Instruct'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model2'
     else:
-        llm_name = '/home/penglin.ge/data/llama_factory/model/fine-Qwen2.5-7B-Instruct'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model3'
 
     parser = argparse.ArgumentParser(description="LLM OpenIE")
     parser.add_argument('--dataset', type=str, default=dataset, help='Dataset name')
@@ -144,5 +143,5 @@ def search_best_params(mode, docs, result_log="coarse_param_search_results.csv")
 
 if __name__ == "__main__":
     extractor('dev2', 1, 0.17, 0.95)
-    # main('dev1', 2, 0.2, 0.9)
-    # main('dev1', 3, 0.5, 0.95)
+    extractor('dev2', 2, 0.2, 0.9)
+    extractor('dev2', 3, 0.5, 0.95)

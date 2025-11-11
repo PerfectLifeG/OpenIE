@@ -1,39 +1,44 @@
-ner_system = """You are given a sentence, a list of entities, and their corresponding coarse_types. Your task is to predict the fine_type for each entity based on the given information.
+ner_system = """You are given a sentence and a list of triples (subject, relationship, object).
+Your task is to predict the fine_type for each entity in the triples based on its coarse_type, the relationship, and the sentence context.
 """
-
-one_shot_ner_paragraph = """{
-    "sentence": "The aim of this study was to explain this finding by examining factors potentially related to triglycerides in these women . RESEARCH DESIGN AND METHODSOf the 733 women randomized to metformin or insulin in the MiG trial , 432 ( 219 metformin and 213 insulin ) had fasting plasma triglycerides measured at enrollment and at 36 weeks .",
-    "entities": [
+one_shot_ner_paragraph = """
+{
+    "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
+    "triples": [
         {
-            "name": "triglycerides",
-            "coarse_type": "science",
-        },
-        {
-            "name": "metformin",
-            "coarse_type": "science",
+            "subject": [
+                "name": "Brooklyn",
+                "coarse_type": "location",
+            ],
+            "relationship": "location contains",
+            "object": [
+                "name": "Bushwick",
+                "coarse_type": "location",
+            ]
         }
     ]
 }
 """
 
-
 one_shot_ner_output = """    
-    {
-        "entities": [
-          {
-            "name": "triglycerides",
-            "coarse_type": "science",
-            "fine_type": "chemical"
-          },
-          {
-            "name": "metformin",
-            "coarse_type": "science",
-            "fine_type": "chemical"
-          }
-        ]
-    }
+{
+    "output": [
+        {
+            "subject": [
+                "name": "Brooklyn",
+                "coarse_type": "location",
+                "fine_type": "district"
+            ],
+            "relationship": "location contains",
+            "object": [
+                "name": "Bushwick",
+                "coarse_type": "location",
+                "fine_type": "facility"
+            ]
+        }
+    ]
+}
 """
-
 
 prompt_template = [
     {"role": "system", "content": ner_system},

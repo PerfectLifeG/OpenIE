@@ -7,23 +7,23 @@ Extract all entities from the sentence that match the given coarse types and sch
 {
     "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
     "schema": [
-      "company shareholder among major shareholders",
-      "location contains"
+        "company shareholder among major shareholders",
+        "location contains"
     ],
     "coarse_types": [
-      "organization",
-      "location",
-      "medicine",
-      "mathematics"
+        "organization",
+        "location",
+        "medicine",
+        "mathematics"
     ]
 }
 """
 
 
 one_shot_ner_output = """    
-    {
-        "entities": ["Brooklyn", "Bushwick"]
-    }
+{
+    "entities": ["Brooklyn", "Bushwick"]
+}
 """
 
 
