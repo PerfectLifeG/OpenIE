@@ -30,6 +30,11 @@ class OpenIE:
             - list: [raw_text_dict1, raw_text_dict2, ...]
         openie_results_path: str, 保存路径
         """
+        if openie_results_path == "/home/penglin.ge/code/OpenIE/outputs/test2/ner_3__home_penglin.ge_code_DoRA_commonsense_reasoning_model3.json":
+            pass
+
+
+
         import os, json
 
         dir_path = os.path.dirname(openie_results_path)

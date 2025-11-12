@@ -117,26 +117,44 @@ class VLLMOffline:
         # 配置结构化输出 (JSON)
         # -----------------------------
         structured_outputs_params = None
-        if json_template == 'ner' or json_template == 'ner_3':
-            # NER 输出 schema
+        if json_template == 'ner_3':
+            # NER3 输出 schema
             ner_schema = {
                 "type": "object",
                 "properties": {
-                    "entities": {
+                    "output": {
                         "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
-                                "name": {"type": "string"},
-                                "coarse_type": {"type": "string"},
-                                "fine_type": {"type": "string"}
+                                "subject": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "coarse_type": {"type": "string"},
+                                        "fine_type": {"type": "string"}
+                                    },
+                                    "required": ["name", "coarse_type", "fine_type"]
+                                },
+                                "relationship": {"type": "string"},
+                                "object": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "coarse_type": {"type": "string"},
+                                        "fine_type": {"type": "string"}
+                                    },
+                                    "required": ["name", "coarse_type", "fine_type"]
+                                }
                             },
-                            "required": ["name", "coarse_type", "fine_type"]
+                            "required": ["subject", "relationship", "object"]
                         }
                     }
                 },
-                "required": ["entities"]
+                "required": ["output"]
             }
+
+
         elif json_template == 'ner_1':
             ner_schema = {
                 "type": "object",
@@ -148,24 +166,42 @@ class VLLMOffline:
                 },
                 "required": ["entities"]
             }
+
         elif json_template == 'ner_2':
+            # NER2 输出 schema
             ner_schema = {
                 "type": "object",
                 "properties": {
-                    "entities": {
+                    "triples": {
                         "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
-                                "name": {"type": "string"},
-                                "coarse_type": {"type": "string"}
+                                "subject": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "coarse_type": {"type": "string"}
+                                    },
+                                    "required": ["name", "coarse_type"]
+                                },
+                                "relationship": {"type": "string"},
+                                "object": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {"type": "string"},
+                                        "coarse_type": {"type": "string"}
+                                    },
+                                    "required": ["name", "coarse_type"]
+                                }
                             },
-                            "required": ["name", "coarse_type"]
+                            "required": ["subject", "relationship", "object"]
                         }
                     }
                 },
-                "required": ["entities"]
+                "required": ["triples"]
             }
+
         structured_outputs_params = StructuredOutputsParams(json=ner_schema)
 
         sampling_params = SamplingParams(

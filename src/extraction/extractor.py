@@ -3,7 +3,7 @@ import os
 import numpy as np
 import csv
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import json
 
 import torch
@@ -29,9 +29,9 @@ def extractor(dataset:str,mode,temp,tp):
     if mode == 1:
         llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model1'
     elif mode == 2:
-        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model2'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/Qwen_model2'
     else:
-        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model3'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/Qwen_model3'
 
     parser = argparse.ArgumentParser(description="LLM OpenIE")
     parser.add_argument('--dataset', type=str, default=dataset, help='Dataset name')
@@ -55,26 +55,34 @@ def extractor(dataset:str,mode,temp,tp):
 
     # 读取实体
     if mode == 2:
-        entities_path = f"/home/penglin.ge/code/HippoRAG-main/outputs/{dataset}/openie_results_ner__home_penglin.ge_data_llama_factory_model_entity2-Qwen2.5-7B-Instruct.json"
+        entities_path = f"/home/penglin.ge/code/OpenIE/outputs/{dataset}/ner_1__home_penglin.ge_code_DoRA_commonsense_reasoning_model1.json"
     elif mode == 3:
-        entities_path = f"/home/penglin.ge/code/HippoRAG-main/outputs/{dataset}/openie_results_ner__home_penglin.ge_data_llama_factory_model_coarse2-Qwen2.5-7B-Instruct.json"
+        entities_path = f"/home/penglin.ge/code/OpenIE/outputs/{dataset}/ner_2__home_penglin.ge_code_DoRA_commonsense_reasoning_Qwen_model2.json"
 
-    if mode == 2 or mode == 3:
+    if mode == 2:
         with open(entities_path, "r") as f:
             entities_list = json.load(f)
         id2entities = {item["id"]: item.get("entities", []) for item in entities_list}
+    if mode == 3:
+        with open(entities_path, "r") as f:
+            entities_list = json.load(f)
+        id2triples = {item["id"]: item.get("triples", []) for item in entities_list}
 
     docs = {}
     for i,item in enumerate(corpus):
-        if args.prompt == 'ner_3':
-            item_no_id = {k: v for k, v in item.items() if k == "sentence"}  # 去掉 id  or k == "coarse_types"
-        else:
+        if args.prompt == 'ner_2':
+            item_no_id = {k: v for k, v in item.items() if k == "sentence" or k == "coarse_types" or k == "schema"}  # 去掉 id  or k == "coarse_types"
+        elif args.prompt == 'ner_1':
             item_no_id = {k: v for k, v in item.items() if k == "sentence" or k == "coarse_types" or k == "schema"}  # 去掉 id
+        else:
+            item_no_id = {k: v for k, v in item.items() if k == "sentence"}  # 去掉 id
 
         item_id = item.get("id", i)
 
-        if args.prompt == 'ner_2' or args.prompt == 'ner_3':
+        if args.prompt == 'ner_2':
             item_no_id["entities"] = id2entities.get(item_id, [])
+        if args.prompt == 'ner_3':
+            item_no_id["triples"] = id2triples.get(item_id, [])
 
         json_str = json.dumps(item_no_id, ensure_ascii=False, indent=2)
         docs[item_id] = json_str  # 保留 id 对应的内容（不含 id）
@@ -142,6 +150,6 @@ def search_best_params(mode, docs, result_log="coarse_param_search_results.csv")
 
 
 if __name__ == "__main__":
-    extractor('dev2', 1, 0.17, 0.95)
-    extractor('dev2', 2, 0.2, 0.9)
-    extractor('dev2', 3, 0.5, 0.95)
+    extractor('error', 1, 0.17, 0.95)
+    extractor('error', 2, 0.2, 0.9)
+    extractor('error', 3, 0.5, 0.95)

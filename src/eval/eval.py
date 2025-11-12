@@ -126,8 +126,8 @@ def evaluate_ner(dev_gold_path, pred_path, mode="strict", error_output_path=None
 
 
 def run():
-    data_path = '/home/penglin.ge/code/HippoRAG-main/reproduce/dataset/dev2.json'
-    save_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/nerner_1__home_penglin.ge_code_DoRA_commonsense_reasoning_output3.json'
+    data_path = '/home/penglin.ge/code/HippoRAG-main/reproduce/dataset/test2.json'
+    save_path = '/home/penglin.ge/code/OpenIE/outputs/test2/ner_1__home_penglin.ge_code_DoRA_commonsense_reasoning_model1.json'
     error_output_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/error.json'
 
     # 三种模式分别评测

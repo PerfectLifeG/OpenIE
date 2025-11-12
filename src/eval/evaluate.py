@@ -6,6 +6,7 @@ import os
 
 _SBER_MODEL = None
 
+
 # 加载句向量模型
 def _get_model(model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
                local_dir: str = r"D:\hf_models\all-MiniLM-L6-v2",
@@ -72,7 +73,7 @@ def _to_map_name_ct_2_ft(sample: Dict[str, Any]) -> Dict[Tuple[str, str], str]:
 def evaluate_ner(dev_gold_path: str, pred_path: str,
                  strict: bool = True, by_type: bool = False, *,
                  strict_semantic: bool = False, model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
-                 threshold: float = 0.80):
+                 threshold: float = 0.80, error_output_path: Optional[str] = None):
     """
     参数
     ----
@@ -81,12 +82,16 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
     strict_semantic: 严格评测时是否用 fine_type 语义相似度（默认 False）
     model_name: 句向量模型名（仅 strict_semantic=True 时会被使用）
     threshold: 语义相似阈值（余弦），默认 0.80
+    error_output_path: 错误样例保存路径，如果未指定则不保存
     """
     gold = _load_jsonl_or_json(dev_gold_path)  # 标准答案
-    pred = _load_jsonl_or_json(pred_path)      # 预测结果
+    pred = _load_jsonl_or_json(pred_path)  # 预测结果
 
     tp = fp = fn = 0
     type_counter = Counter()
+
+    # 错误样例存储列表
+    error_analysis = []
 
     if not strict:
         # 宽松模式：比对头实体名、关系、尾实体名
@@ -98,7 +103,13 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
             fp_i = len(pset - gset)
             fn_i = len(gset - pset)
 
-            tp += tp_i; fp += fp_i; fn += fn_i
+            tp += tp_i;
+            fp += fp_i;
+            fn += fn_i
+
+            # 保存错误样例，并标注错误类型（FP 或 FN）
+            if fp_i > 0 or fn_i > 0:
+                error_analysis.append({"gold": g, "pred": p, "error_type": "FP" if fp_i > 0 else "FN"})
 
         # 宽松模式不支持 by_type（保持与原行为一致）
         by_type = False
@@ -114,7 +125,13 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
                 fp_i = len(pset - gset)
                 fn_i = len(gset - pset)
 
-                tp += tp_i; fp += fp_i; fn += fn_i
+                tp += tp_i;
+                fp += fp_i;
+                fn += fn_i
+
+                # 保存错误样例，并标注错误类型（FP 或 FN）
+                if fp_i > 0 or fn_i > 0:
+                    error_analysis.append({"gold": g, "pred": p, "error_type": "FP" if fp_i > 0 else "FN"})
 
                 if by_type:
                     for _, ct in (gset & pset):
@@ -140,6 +157,10 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
                 only_gold = gkeys - pkeys
                 fp += len(only_pred)
                 fn += len(only_gold)
+
+                # 保存错误样例，并标注错误类型（FP 或 FN）
+                if len(only_pred) > 0 or len(only_gold) > 0:
+                    error_analysis.append({"gold": g, "pred": p, "error_type": "FP" if len(only_pred) > 0 else "FN"})
 
                 if by_type:
                     for _, ct in only_pred:
@@ -183,6 +204,12 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
                                 type_counter[(k[1], "fp")] += 1
                                 type_counter[(k[1], "fn")] += 1
 
+    # 如果提供了路径，则保存错误样例
+    if error_output_path:
+        with open(error_output_path, 'w', encoding='utf-8') as f:
+            json.dump(error_analysis, f, ensure_ascii=False, indent=2)
+        print(f"错误样例已保存到：{error_output_path}")
+
     # 计算 Precision, Recall, F1
     def prf(tp_: int, fp_: int, fn_: int):
         p = tp_ / (tp_ + fp_) if (tp_ + fp_) > 0 else 0.0
@@ -211,3 +238,9 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
         "threshold": threshold if (strict and strict_semantic) else None
     }
     return report
+
+
+if __name__ == '__main__':
+    data_path = '/home/penglin.ge/code/OpenIE/data/dev2.json'
+    save_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/data_converted.json'
+    print(evaluate_ner(data_path, save_path, strict=True))

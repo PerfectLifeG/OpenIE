@@ -20,7 +20,7 @@ Extract all entities from the sentence that match the given coarse types and sch
 """
 
 
-one_shot_ner_output = """    
+one_shot_ner_output = """
 {
     "entities": ["Brooklyn", "Bushwick"]
 }

@@ -42,12 +42,12 @@ class VLLMOfflineOpenIE(OpenIE):
 
         #构造 NER 输入 Prompt
         ner_input_messages = [self.prompt_template_manager.render(name=self.global_config.prompt, passage=p) for p in chunk_passages.values()] #为每个 passage 生成 NER prompt
-        # for j, prompt in enumerate(ner_input_messages[:50]):
-        #     print(f"\n=== Prompt {j} ===")
-        #     for msg in prompt:
-        #         print(f"[{msg['role']}]")
-        #         print(msg['content'])
-        #         print("-" * 30)
+        for j, prompt in enumerate(ner_input_messages[:]):
+            print(f"\n=== Prompt {j} ===")
+            for msg in prompt:
+                print(f"[{msg['role']}]")
+                print(msg['content'])
+                print("-" * 30)
 
         #vllm_offline的批推理
         # ner_input_messages = ner_input_messages[:2]

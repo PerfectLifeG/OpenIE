@@ -1,8 +1,15 @@
 ner_system = """You are given a sentence, a list of entities with their coarse_types, and a schema.
 Your task is to form valid triples (subject, relationship, object) by matching entities to the schema based on their coarse_types and the sentence context.
+If no valid triples can be formed, return:
+{
+    "triples": []
+}
 """
 
-one_shot_ner_paragraph = """
+few_shot = []
+
+one_shot_ner_paragraph = """You are given a sentence, a list of entities with their coarse_types, and a schema. 
+Your task is to form valid triples (subject, relationship, object) by matching entities to the schema based on their coarse_types and the sentence context.
 {
     "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
     "schema": [
@@ -20,7 +27,7 @@ one_shot_ner_paragraph = """
 """
 
 
-one_shot_ner_output = """    
+one_shot_ner_output = """
 {
     "triples": [
         {

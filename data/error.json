@@ -1,0 +1,106 @@
+[
+    {
+    "id": "9e0bbba5-b4a8-4780-a17e-98b6644764cf",
+    "source": "CMeIE",
+    "sentence": "【流行病学】 肺吸虫病分布甚广，亚洲、非洲，北美洲、拉丁美洲及欧洲均有发生。 【鉴别诊断】 须与下列疾病相鉴别：肺结核、胸膜炎、肺脓肿、支气管扩张、结核性脑膜炎、脑脓肿、脊髓灰质炎、脑肿瘤、结核性腹膜炎、肠炎、痢疾等。",
+    "schema": [
+      "病因",
+      "相关（导致）",
+      "鉴别诊断",
+      "发病性别倾向"
+    ],
+    "coarse_types": [
+      "医学",
+      "时间",
+      "产品"
+    ]
+  },
+  {
+    "id": "caec9ee4-0e79-4756-9e3f-93da1b20f556",
+    "source": "NYT11",
+    "sentence": " In little Mexico the money seems like a lot , '' said Roselino Sebastian Castaneda , 72 , who returned nine years ago to his hometown in Tierra Caliente , Guerrero , after 35 years shuttling from California to Texas to Louisiana to Colorado to Montana . ",
+    "schema": [
+      "administrative division of country",
+      "location contains"
+    ],
+    "coarse_types": [
+      "economics",
+      "product",
+      "pedagogy",
+      "location",
+      "science"
+    ]
+  },
+  {
+    "id": "00f7edf1-7750-4488-9725-570e13fe9646",
+    "source": "NYT11",
+    "sentence": " In a letter to Congress two months ago , 104 bankruptcy law professors predicted that '' the deepest hardship '' would '' be felt in the heartland , '' where the filing rates are highest Utah , Tennessee , Georgia , Nevada , Indiana , Alabama , Arkansas , Ohio , Mississippi and Idaho . ",
+    "schema": [
+      "country capital",
+      "location contains",
+      "administrative division of country",
+      "company"
+    ],
+    "coarse_types": [
+      "event",
+      "organization",
+      "medicine",
+      "food",
+      "sociology",
+      "location",
+      "meteorology"
+    ]
+  },
+  {
+    "id": "5213c986-e11e-4d71-8b27-b8e2f41d1776",
+    "source": "CMeIE",
+    "sentence": "第二节 急进性肾小球肾炎 急进性肾小球肾炎（rapidly progressive glomerulonephritis，RPGN）简称急进性肾炎，系急进性肾炎综合征。 （三）肾功能进行性减退 肾功能在2～3个月内进行性降低，并出现尿毒症及酸中毒的表现：如恶心、呕吐、厌食、面色苍白、皮肤瘙痒、鼻出血、紫癜、呼吸深大、精神萎靡及表情淡漠等。",
+    "schema": [
+      "临床表现",
+      "同义词（药物）",
+      "同义词（其他治疗）",
+      "辅助治疗"
+    ],
+    "coarse_types": [
+      "生物",
+      "医学",
+      "事件",
+      "产品"
+    ]
+  },
+  {
+    "id": "f0e052e3-0d43-410a-8b1e-ec8d966028bd",
+    "source": "CMeIE",
+    "sentence": "【诊断】 本病诊断要点为：①低钾血症（1. 5～2. 5mmol/ L）；②高尿钾（＞20mmol/L）；③代谢性碱中毒（血浆＞ 30mmol/L）；④高肾素血症；⑤高醛固酮血症；⑥对外源性加压素不敏感；⑦肾小球旁器增生；⑧低氯血症（尿氯＞20mmol/ L）；⑨血压正常。 临床上可按图12-12所示Bartter综合征诊断步骤来逐步确诊该病。",
+    "schema": [
+      "化疗",
+      "发病部位",
+      "鉴别诊断",
+      "临床表现"
+    ],
+    "coarse_types": [
+      "组织机构",
+      "时间",
+      "医学"
+    ]
+  },
+  {
+    "id": "bf329fa3-9e43-47ee-9de3-5d46de729a23",
+    "source": "GIDS",
+    "sentence": "Born in Cleveland, Ohio, in 1934, Richard Cartwright Austin was raised in Washington, DC in a politically active family. He received a ((NAM: Bachelor of Arts )) from Swarthmore College in 1956, a Master of Divinity from Union Theological Seminary in 1959, and a Doctor of the Science of Theology from San Francisco Theological Seminary in 1975.",
+    "schema": [
+      "place of birth",
+      "education institution",
+      "education degree",
+      "place of death"
+    ],
+    "coarse_types": [
+      "science",
+      "pedagogy",
+      "food",
+      "product",
+      "organization",
+      "person"
+    ]
+  }
+]
