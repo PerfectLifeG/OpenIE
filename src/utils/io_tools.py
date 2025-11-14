@@ -6,6 +6,9 @@ from __future__ import annotations
 import json, os
 from pathlib import Path
 import yaml
+import hashlib
+from typing import Any, List, Dict, Optional
+import collections.abc as cabc
 
 def load_yaml(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -42,34 +45,87 @@ from typing import Any, Iterable
 
 def write_json_overwrite(
     path: Path,
-    records: Iterable[Any],
+    records: Any,                     # 允许传任意对象（dict/list/tuple/可迭代/标量）
     overwrite: bool = True,
     indent: int = 2,
     sort_keys: bool = False,
+    default: Optional[Any] = str,     # 保持你原来的默认
+    add_trailing_newline: bool = True,
+    fsync: bool = False,
 ) -> None:
     """
-    将 records 写为一个 JSON 数组到 path。
+    将 `records` 写为 JSON 到 path。
+
+    行为：
+      - dict/list/tuple            -> 原样写入（对象 JSON）
+      - 其它可迭代(非str/bytes)     -> 收集为 list 再写（与旧版一致：写 JSON 数组）
+      - 其余标量/对象               -> 原样写入（让 json.dump 去处理）
     """
-    print(f"[INFO] 写入文件：{path}")
+    print(f"[INFO] 写入文件（原子方式）：{path}")
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    if path.exists():
-        if overwrite:
-            path.unlink()  # 覆盖旧文件
-        else:
-            raise FileExistsError(f"{path} 已存在且 overwrite=False，已停止写入。")
+    if path.exists() and not overwrite:
+        raise FileExistsError(f"{path} 已存在且 overwrite=False，已停止写入。")
 
-    # 收集为列表（兼容生成器/迭代器）
-    data = list(records)
+    # === 关键兼容逻辑 ===
+    if isinstance(records, (dict, list, tuple)):
+        data = records
+    elif isinstance(records, cabc.Iterable) and not isinstance(records, (str, bytes, bytearray)):
+        # 兼容旧逻辑：把任意可迭代（非字符串/字节）当成“记录流”，收集为数组
+        data = list(records)
+    else:
+        # 标量或其它对象：直接让 json.dump 处理
+        data = records
 
-    # 写入为标准 JSON（数组）
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(
-            data,
-            f,
-            ensure_ascii=False,  # 友好显示中文
-            indent=indent,       # 美化缩进
-            sort_keys=sort_keys, # 可选：键排序
-            default=str          # 兜底序列化非常规对象
-        )
-        f.write("\n")  # 结尾换行，友好对齐工具习惯
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    with tmp.open("w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=indent, sort_keys=sort_keys, default=default)
+        if add_trailing_newline:
+            f.write("\n")
+        if fsync:
+            f.flush()
+            os.fsync(f.fileno())
+    # 同一目录内原子替换
+    tmp.replace(path)
+
+def file_sha256(path: Path, chunk_size: int = 1 << 20) -> str:
+    """计算文件的 SHA256 摘要，用于校验数据一致性。"""
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        while True:
+            b = f.read(chunk_size)
+            if not b:
+                break
+            h.update(b)
+    return h.hexdigest()
+
+
+def load_json_or_jsonl(path: Path) -> List[Dict[str, Any]]:
+    """
+    兼容加载：
+      - JSON 列表：  [ {...}, {...}, ... ]
+      - JSONL 行：   {...}\n{...}\n
+    """
+    text = path.read_text(encoding="utf-8").strip()
+    if not text:
+        return []
+    first = text[0]
+    if first == "[":
+        data = json.loads(text)
+        if not isinstance(data, list):
+            raise ValueError("JSON 顶层应为 list。")
+        return data
+    # 否则按 JSONL 逐行解析
+    records: List[Dict[str, Any]] = []
+    for i, line in enumerate(text.splitlines()):
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            obj = json.loads(line)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"解析 JSONL 第 {i+1} 行失败: {e}")
+        if not isinstance(obj, dict):
+            raise ValueError(f"JSONL 第 {i+1} 行不是对象。")
+        records.append(obj)
+    return records

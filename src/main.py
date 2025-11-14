@@ -13,11 +13,15 @@ from .extraction.gptner_extractor import EntityExtractor
 from .eval.evaluate import evaluate_ner
 from .eval.self_verify import SelfVerifier
 
+from .retrieval.inverted_retrieval import InvertedRetrieval
+
+
 def parse_args(argv=None):
     p = argparse.ArgumentParser()
     p.add_argument("--config", default="configs/default.yaml")
     p.add_argument("--split", default="dev", choices=["dev", "test"])
     return p.parse_args(argv)
+
 
 def main(argv=None):
     args = parse_args(argv)
@@ -30,9 +34,29 @@ def main(argv=None):
 
     # 递归查找数据文件
     data_dir = Path(cfg["paths"]["data_dir"])
+    train_path = iter_find_file(data_dir, "train2.json")
     dev_path = iter_find_file(data_dir, "dev2.json")
     test_path = iter_find_file(data_dir, "test2.json")
 
+    # 测试检索 few-shots
+    # 构建索引
+    retriever = InvertedRetrieval(data_path=train_path, indexdir=out_dir)
+    retriever.build_indexes()
+
+    # # 检索
+    # shots1 = retriever.retrieve_by_coarse_type(coarse_type="人", k=4, seed=42)
+    # paired_shots = retriever.to_io_pairs(shots1)
+    # # shots2 = retriever.retrieve_by_schema(schema="所属专辑", k=6, seed=123)
+
+    # print(shots1)
+    # print(paired_shots)
+    # # print(shots2)
+
+    # # 测试 evaluate_ner
+    # data_path = dev_path
+    # save_path = "./outputs/ner_3_converted_split.json"
+    # report = evaluate_ner(dev_gold_path=str(data_path), pred_path=str(save_path), strict=cfg["evaluation"]["strict_span_match"], error_output_path="./outputs/ner_3_errors.json")
+    # print(report)
     if args.split == "dev":
         data_path = dev_path
         save_path = Path(cfg["paths"]["dev_pred_path"])
@@ -49,9 +73,10 @@ def main(argv=None):
     extractor = EntityExtractor(cfg)
 
     # outputs = []
+
     result = extractor.extract_and_save_all(dataset, save_path)
     print("[OK] 抽取完成。路径：", result)
-    
+
     # LLM 验证
     verifier = SelfVerifier(cfg)
     dataset = load_json_dataset(result, max_examples=cfg["runtime"]["max_examples"])
@@ -60,16 +85,17 @@ def main(argv=None):
     # for ex in dataset:
     #     result = extractor.extract(ex)
     #     outputs.append(result)
-    
-    # # 多线程
-    # max_threads = 30
-    # outputs = extractor.extract_batch(dataset, max_threads=max_threads)
 
-    # write_json_overwrite(save_path, outputs, overwrite=cfg["project"]["overwrite_outputs"])
+    # # # 多线程
+    # # max_threads = 30
+    # # outputs = extractor.extract_batch(dataset, max_threads=max_threads)
 
-    # if args.split == "dev":
-    #     report = evaluate_ner(dev_gold_path=str(data_path), pred_path=str(save_path), strict=cfg["evaluation"]["strict_span_match"])
-    #     print(json.dumps(report, ensure_ascii=False, indent=2))
+    # # write_json_overwrite(save_path, outputs, overwrite=cfg["project"]["overwrite_outputs"])
+
+    # # if args.split == "dev":
+    # #     report = evaluate_ner(dev_gold_path=str(data_path), pred_path=str(save_path), strict=cfg["evaluation"]["strict_span_match"])
+    # #     print(json.dumps(report, ensure_ascii=False, indent=2))
+
 
 if __name__ == "__main__":
     main()

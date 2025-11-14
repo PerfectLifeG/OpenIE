@@ -2,7 +2,7 @@ import os
 import asyncio
 import importlib.util
 from string import Template
-from typing import Dict, List, Union, Any, Optional
+from typing import Dict, List, Union, Any, Optional, Tuple
 from dataclasses import dataclass, field, asdict
 
 
@@ -13,10 +13,6 @@ logger = get_logger(__name__)
 
 @dataclass
 class PromptTemplateManager:
-    # templates_dir: Optional[str] = field(
-    #     default=None, 
-    #     metadata={"help": "Directory containing template scripts. Default to the `templates` dir under dir whether this class is defined."}
-    # )
     role_mapping: Dict[str, str] = field(
         default_factory=lambda: {"system": "system", "user": "user", "assistant": "assistant"},
         metadata={"help": "Mapping from default roles in prompte template files to specific LLM providers' defined roles."}
@@ -44,53 +40,43 @@ class PromptTemplateManager:
 
         self._load_templates()
 
-    
-    
     def _load_templates(self) -> None:
         """
         Load all templates from Python scripts in the templates directory.
+        Only modules with `prompt_template` variable will be loaded.
         """
         if not os.path.exists(self.templates_dir):
             logger.error(f"Templates directory '{self.templates_dir}' does not exist.")
             raise FileNotFoundError(f"Templates directory '{self.templates_dir}' does not exist.")
-        
-        
+
         logger.info(f"Loading templates from directory: {self.templates_dir}")
         for filename in os.listdir(self.templates_dir):
             if filename.endswith(".py") and filename != "__init__.py":
                 script_name = os.path.splitext(filename)[0]
-
                 try:
-                    try:
-                        module_name = f"src.extraction.prompts.templates.{script_name}"
-                        module = importlib.import_module(module_name)
-                    except ModuleNotFoundError:
-                        module_name = f".prompts.templates.{script_name}"
-                        module = importlib.import_module(module_name, 'hipporag')
-
-                    # spec = importlib.util.spec_from_file_location(script_name, script_path)
-                    # module = importlib.util.module_from_spec(spec)
-                    # spec.loader.exec_module(module)
+                    module_name = f"src.extraction.prompts.templates.{script_name}"
+                    module = importlib.import_module(module_name)
 
                     if not hasattr(module, "prompt_template"):
-                        logger.error(f"Module '{module_name}' does not define a 'prompt_template'.")
-                        raise AttributeError(f"Module '{module_name}' does not define a 'prompt_template'.")
+                        # 只记录信息，不报错
+                        logger.info(f"Module '{module_name}' does not define a 'prompt_template', skipping.")
+                        continue
 
                     prompt_template = module.prompt_template
                     logger.debug(f"Loaded template from {module_name}")
-                    
+
                     if isinstance(prompt_template, Template):
                         self.templates[script_name] = prompt_template
                     elif isinstance(prompt_template, str):
                         self.templates[script_name] = Template(prompt_template)
                     elif isinstance(prompt_template, list) and all(
-                        isinstance(item, dict) and "role" in item and "content" in item for item in prompt_template
+                            isinstance(item, dict) and "role" in item and "content" in item for item in prompt_template
                     ):
-                        # Adjust roles based on the provided role mapping
-                        for item in prompt_template:#根据 role_mapping 替换模板里的 role，如果找不到就保持原来的 role 不变。
-                            item["role"] = self.role_mapping.get(item["role"], item["role"]) #如果没找到返回item["role"]
-                            item["content"] = item["content"] if isinstance(item["content"], Template) else Template(item["content"])
-                        self.templates[script_name] = prompt_template #self.templates['ner']=list
+                        for item in prompt_template:
+                            item["role"] = self.role_mapping.get(item["role"], item["role"])
+                            item["content"] = item["content"] if isinstance(item["content"], Template) else Template(
+                                item["content"])
+                        self.templates[script_name] = prompt_template
                     else:
                         raise TypeError(
                             f"Invalid prompt_template format in '{module_name}.py'. Must be a Template or List[Dict]."
@@ -101,6 +87,44 @@ class PromptTemplateManager:
                 except Exception as e:
                     logger.error(f"Failed to load template from '{module_name}.py': {e}")
                     raise
+
+    def build_chat_prompt(
+            self,
+            template_name: str,
+            new_passage: str,
+            few_shot: Optional[List[Tuple[str, str]]] = None,
+            extra_vars: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
+        extra_vars = extra_vars or {}
+        # 自动加入 passage
+        extra_vars = {"passage": new_passage, **extra_vars}
+
+        template = self.get_template(template_name)
+        prompt_list = []
+
+        if isinstance(template, list):
+            for msg in template:
+                content = msg["content"]
+                if isinstance(content, Template):
+                    content = content.substitute(**extra_vars)
+                prompt_list.append({"role": msg["role"], "content": content})
+        elif isinstance(template, Template):
+            prompt_list.append({"role": "system", "content": template.substitute(**extra_vars)})
+        else:
+            raise TypeError(f"Unsupported template type: {type(template)}")
+
+        # 插入 few-shot
+        if few_shot:
+            for example_in, example_out in few_shot:
+                prompt_list.append({"role": "user", "content": example_in})
+                prompt_list.append({"role": "assistant", "content": example_out})
+
+        # 不用再手动插入 passage，因为 extra_vars 已经包含了
+        if not any(msg["content"] == "${passage}" for msg in prompt_list):
+            passage_content = Template("${passage}").substitute(**extra_vars)
+            prompt_list.append({"role": "user", "content": passage_content})
+
+        return prompt_list
 
     def render(self, name: str, **kwargs) -> Union[str, List[Dict[str, Any]]]:
         """

@@ -1,11 +1,4 @@
-ner_system = (
-    "You are an expert in joint entity and relation extraction. "
-    "Given a sentence, coarse_types, and a schema, extract only entities that can participate in the schema and match the coarse_types. "
-    "Predict the fine_type of these entities, then form triples (subject, relationship, object) using them. "
-    "Output in JSON, with each subject/object as [name, coarse_type, fine_type], and relationship from the schema."
-)
-
-one_shot_ner_paragraph = """{
+one_shot_ner_paragraph2 = """{
     "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
     "schema": [
       "company shareholder among major shareholders",
@@ -20,7 +13,7 @@ one_shot_ner_paragraph = """{
 }
 """
 
-one_shot_ner_output = """{
+one_shot_ner_output2 = """{
     "output": [
       {
         "subject": [
@@ -39,7 +32,7 @@ one_shot_ner_output = """{
 }
 """
 
-one_shot_ner_paragraph2 = """{
+one_shot_ner_paragraph = """{
     "sentence": "Roblin  was a candidate in  Winnipeg  South Centre for the 1968 federal election but lost to Liberal E.B. Osler by over votes .",
     "schema": [
       "spouse",
@@ -53,7 +46,7 @@ one_shot_ner_paragraph2 = """{
 }
 """
 
-one_shot_ner_output2 = """{
+one_shot_ner_output = """{
     "output": []
 }
 """
@@ -94,17 +87,3 @@ one_shot_ner_output3 = """{
     ]
 }
 """
-
-few_shot = []
-few_shot.append([one_shot_ner_paragraph, one_shot_ner_output])
-few_shot.append([one_shot_ner_paragraph2, one_shot_ner_output2])
-
-prompt_template = [
-    {"role": "system", "content": ner_system},
-]
-
-for example_in, example_out in few_shot:
-    prompt_template.append({"role": "user", "content": example_in})
-    prompt_template.append({"role": "assistant", "content": example_out})
-
-prompt_template.append({"role": "user", "content": "${passage}"})
