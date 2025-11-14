@@ -7,15 +7,16 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import json
 
 import torch
+
 torch._dynamo.disable()
 
-from .OpenIE import OpenIE
-from .utils.misc_utils import string_to_bool
-from .utils.config_utils import BaseConfig
+from src.extraction.OpenIE import OpenIE
+from src.extraction.utils.misc_utils import string_to_bool
+from src.extraction.utils.config_utils import BaseConfig
 
 import argparse
 
-from ..eval.eval import evaluate_ner
+from src.eval.eval import evaluate_ner
 
 # os.environ["LOG_LEVEL"] = "DEBUG"
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
@@ -25,9 +26,10 @@ import logging
 from tqdm import tqdm
 
 
-def extractor(dataset:str,mode,temp,tp):
+def extractor(dataset: str, mode, temp, tp):
     if mode == 1:
-        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model1'
+        llm_name = '/home/penglin.ge/data/huggingface/model/Llama-3.1-8B-Instruct'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model_32_3_f'
     elif mode == 2:
         llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/Qwen_model2'
     else:
@@ -37,18 +39,18 @@ def extractor(dataset:str,mode,temp,tp):
     parser.add_argument('--dataset', type=str, default=dataset, help='Dataset name')
     parser.add_argument('--llm_name', type=str, default=llm_name, help='LLM name')
     parser.add_argument('--save_dir', type=str, default='outputs', help='Save directory')
-    parser.add_argument('--prompt', type=str, default=f'ner_{mode}')
+    parser.add_argument('--prompt', type=str, default=f'openIE')
     args = parser.parse_args()
 
     dataset_name = args.dataset
     save_dir = args.save_dir
     llm_name = args.llm_name
-    if save_dir == 'outputs':
+    if save_dir == '/home/penglin.ge/code/OpenIE/outputs':
         save_dir = save_dir + '/' + dataset_name
     else:
-        save_dir = save_dir + '_' + dataset_name
+        save_dir = save_dir + '/' + dataset_name
 
-    corpus_path = f"data/{dataset_name}.json"
+    corpus_path = f"/home/penglin.ge/code/OpenIE/data/{dataset_name}.json"
     # corpus_path = f"reproduce/dataset/{dataset_name}_corpus.json" #语料库，title+text
     with open(corpus_path, "r") as f:
         corpus = json.load(f)
@@ -69,11 +71,13 @@ def extractor(dataset:str,mode,temp,tp):
         id2triples = {item["id"]: item.get("triples", []) for item in entities_list}
 
     docs = {}
-    for i,item in enumerate(corpus):
+    for i, item in enumerate(corpus):
         if args.prompt == 'ner_2':
-            item_no_id = {k: v for k, v in item.items() if k == "sentence" or k == "coarse_types" or k == "schema"}  # 去掉 id  or k == "coarse_types"
-        elif args.prompt == 'ner_1':
-            item_no_id = {k: v for k, v in item.items() if k == "sentence" or k == "coarse_types" or k == "schema"}  # 去掉 id
+            item_no_id = {k: v for k, v in item.items() if
+                          k == "sentence" or k == "coarse_types" or k == "schema"}  # 去掉 id  or k == "coarse_types"
+        elif args.prompt == 'ner_1' or args.prompt == 'openIE':
+            item_no_id = {k: v for k, v in item.items() if
+                          k == "sentence" or k == "coarse_types" or k == "schema"}  # 去掉 id
         else:
             item_no_id = {k: v for k, v in item.items() if k == "sentence"}  # 去掉 id
 
@@ -86,8 +90,6 @@ def extractor(dataset:str,mode,temp,tp):
 
         json_str = json.dumps(item_no_id, ensure_ascii=False, indent=2)
         docs[item_id] = json_str  # 保留 id 对应的内容（不含 id）
-
-
 
     config = BaseConfig(
         save_dir=save_dir,
@@ -103,7 +105,6 @@ def extractor(dataset:str,mode,temp,tp):
     llm.pre_openie(docs, temp, tp)
 
     # search_best_params(hipporag, docs)
-
 
 
 def search_best_params(mode, docs, result_log="coarse_param_search_results.csv"):
@@ -123,7 +124,7 @@ def search_best_params(mode, docs, result_log="coarse_param_search_results.csv")
             print(f"Testing temperature={temp:.2f}, top_p={top_p:.2f}")
 
             # 运行主程序
-            mode.pre_openie(docs,temp,top_p)
+            mode.pre_openie(docs, temp, top_p)
             # main('dev1', 1, temp, top_p)
 
             # 评估
@@ -132,24 +133,24 @@ def search_best_params(mode, docs, result_log="coarse_param_search_results.csv")
             recall = ret['overall']['recall']
             pre = ret['overall']['precision']
 
-
             print(f"→ F1 = {f1:.4f}")
 
             # 追加写入结果
             with open(result_log, "a", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow([f"{temp:.2f}", f"{top_p:.2f}",  f"{f1:.4f}", f"{pre:.4f}", f"{recall:.4f}"])
+                writer.writerow([f"{temp:.2f}", f"{top_p:.2f}", f"{f1:.4f}", f"{pre:.4f}", f"{recall:.4f}"])
 
             # 更新最优结果
             if f1 > mxf1:
                 ans = (temp, top_p)
                 mxf1 = f1
-                print(f"⭐ New best: F1={f1:.4f} precision={pre:.4f} recall={recall:.4f} at (temperature={temp:.2f}, top_p={top_p:.2f})")
+                print(
+                    f"⭐ New best: F1={f1:.4f} precision={pre:.4f} recall={recall:.4f} at (temperature={temp:.2f}, top_p={top_p:.2f})")
 
     print("\n✅ 最优参数：", ans, "F1 =", mxf1)
 
 
 if __name__ == "__main__":
-    extractor('error', 1, 0.17, 0.95)
-    extractor('error', 2, 0.2, 0.9)
-    extractor('error', 3, 0.5, 0.95)
+    extractor('dev2', 1, 0.17, 0.95)
+    # extractor('error', 2, 0.2, 0.9)
+    # extractor('error', 3, 0.5, 0.95)

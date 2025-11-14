@@ -45,6 +45,29 @@ one_shot_ner_output = """
 }
 """
 
+one_shot_ner_paragraph2 = """
+  {
+    "sentence": "Roblin  was a candidate in  Winnipeg  South Centre for the 1968 federal election but lost to Liberal E.B. Osler by over votes .",
+    "schema": [
+      "spouse",
+      "countries of residence",
+      "country of birth",
+      "state or provinces of residence"
+    ],
+    "coarse_types": [
+      "organization"
+    ]
+  },
+
+"""
+
+one_shot_ner_output2 = """
+{
+    "triples": []
+}
+"""
+
+
 
 prompt_template = [
     {"role": "system", "content": ner_system},

@@ -1,8 +1,8 @@
 from typing import List
 
-from .base import LLMConfig
-from ..utils.llm_utils import TextChatMessage
-from ..utils.logging_utils import get_logger
+from src.extraction.llm.base import LLMConfig
+from src.extraction.utils.llm_utils import TextChatMessage
+from src.extraction.utils.logging_utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -75,7 +75,7 @@ class VLLMOffline:
             max_model_len=max_model_len,
             quantization=kwargs.get("quantization", None),
             load_format=kwargs.get("load_format", "auto"),
-            trust_remote_code=True
+            trust_remote_code=True,
         )
 
         self.tokenizer = self.client.get_tokenizer()
@@ -117,7 +117,38 @@ class VLLMOffline:
         # 配置结构化输出 (JSON)
         # -----------------------------
         structured_outputs_params = None
-        if json_template == 'ner_3':
+        if json_template == 'openIE':
+            ner_schema = {
+                "type": "object",
+                "properties": {
+                    "output": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "subject": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "minItems": 3,
+                                    "maxItems": 3
+                                },
+                                "relationship": {"type": "string"},
+                                "object": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "minItems": 3,
+                                    "maxItems": 3
+                                }
+                            },
+                            "required": ["subject", "relationship", "object"]
+                        }
+                    }
+                },
+                "required": ["output"]
+            }
+
+
+        elif json_template == 'ner_3':
             # NER3 输出 schema
             ner_schema = {
                 "type": "object",
@@ -219,7 +250,7 @@ class VLLMOffline:
             self.tokenizer.apply_chat_template(
                 conversation=messages,
                 chat_template=None,
-                tokenize=False,
+                tokenize=False, #返回的是字符串
                 add_generation_prompt=True,
                 continue_final_message=False,
                 tools=None,
@@ -228,7 +259,8 @@ class VLLMOffline:
             for messages in messages_list
         ]
 
-        # print(all_prompts)
+        for i, prompt in enumerate(all_prompts[:5]):
+            print(f"Prompt {i}:\n{prompt}\n{'-' * 50}")
 
         # 调用 vLLM generate
         vllm_output = self.client.generate(

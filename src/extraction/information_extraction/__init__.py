@@ -1,2 +1,2 @@
-from .openie_openai import OpenIE
+from src.extraction.information_extraction.openie_openai import OpenIE
     

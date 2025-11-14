@@ -2,9 +2,9 @@ import json
 import os
 from dataclasses import asdict
 
-from .information_extraction.openie_vllm_offline import VLLMOfflineOpenIE
+from src.extraction.information_extraction.openie_vllm_offline import VLLMOfflineOpenIE
 
-from .utils.misc_utils import *
+from src.extraction.utils.misc_utils import *
 
 logger = logging.getLogger(__name__)
 

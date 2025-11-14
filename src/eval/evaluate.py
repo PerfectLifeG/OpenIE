@@ -215,7 +215,11 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
         p = tp_ / (tp_ + fp_) if (tp_ + fp_) > 0 else 0.0
         r = tp_ / (tp_ + fn_) if (tp_ + fn_) > 0 else 0.0
         f = 2 * p * r / (p + r) if (p + r) > 0 else 0.0
-        return {"precision": p, "recall": r, "f1": f}
+        return {
+            "f1": round(f, 5),
+            "precision": round(p, 5),
+            "recall": round(r, 5)
+        }
 
     # 汇总报告
     report = {}
@@ -242,5 +246,5 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
 
 if __name__ == '__main__':
     data_path = '/home/penglin.ge/code/OpenIE/data/dev2.json'
-    save_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/data_converted.json'
+    save_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/openIE__home_penglin.ge_code_DoRA_commonsense_reasoning_model_32_3_f.json'
     print(evaluate_ner(data_path, save_path, strict=True))

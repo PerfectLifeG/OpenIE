@@ -5,11 +5,11 @@ from typing import Dict, Any, List, TypedDict, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
-from ..prompts.prompt_template_manager import PromptTemplateManager
-from ..utils.logging_utils import get_logger
-from ..utils.llm_utils import fix_broken_generated_json, filter_invalid_triples
-from ..utils.misc_utils import TripleRawOutput, NerRawOutput
-from ..llm.openai_gpt import CacheOpenAI
+from src.extraction.prompts.prompt_template_manager import PromptTemplateManager
+from src.extraction.utils.logging_utils import get_logger
+from src.extraction.utils.llm_utils import fix_broken_generated_json, filter_invalid_triples
+from src.extraction.utils.misc_utils import TripleRawOutput, NerRawOutput
+from src.extraction.llm.openai_gpt import CacheOpenAI
 
 logger = get_logger(__name__)
 
