@@ -239,10 +239,10 @@ if __name__ == '__main__':
     train_path = '/home/penglin.ge/code/OpenIE/data/train2.json'
     out_dir = '/home/penglin.ge/code/OpenIE/outputs'
     retriever = InvertedRetrieval(data_path=train_path, indexdir=out_dir)
-    retriever.build_indexes()
-    shots1 = retriever.retrieve_by_coarse_type(coarse_type="人", k=4, seed=42)
+    # retriever.build_indexes()
+    shots1 = retriever.retrieve_by_coarse_type(coarse_type="人", k=1, seed=42)
     paired_shots = retriever.to_io_pairs(shots1)
-    # shots2 = retriever.retrieve_by_schema(schema="所属专辑", k=6, seed=123)
+    shots2 = retriever.retrieve_by_schema(schema="所属专辑", k=1, seed=123)
 
     print(shots1)
     print(paired_shots)

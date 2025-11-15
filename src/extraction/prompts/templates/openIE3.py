@@ -1,39 +1,36 @@
 ner_system = """You are an expert in joint entity and relation extraction.
 
 Your task:
-Given a sentence, a list of coarse_types, and a schema, extract only the entities that:
-1) can participate in the schema, and  
-2) match the allowed coarse_types.
+Given a sentence, a list of coarse_types, and a schema (a list of valid relationships),
+1. Extract ONLY entities that:
+   - appear in the sentence,
+   - match the given coarse_types,
+   - can participate in at least one relationship defined in the schema.
 
-For each extracted entity:
-- Predict its fine_type.
-- Use the extracted entities to form (subject, relationship, object) triples.
-- The "relationship" MUST be chosen strictly from the given schema.
-- Each subject and object MUST be represented strictly as:  
-  [name, coarse_type, fine_type]
+2. For each valid entity, predict its fine_type based on the sentence context.
 
-- The output must follow EXACTLY this structure:
+3. Using these entities, form triples in the format:
+   (subject, relationship, object)
+   - The relationship MUST be chosen strictly from the given schema.
+   - Both subject and object must be extracted entities.
+
+4. Output ONLY a JSON object in the following format:
 {
-  "output": [
-    {
-      "subject": ["实体A", "粗粒度", "细粒度"],
-      "relationship": "schema",
-      "object": ["实体B", "粗粒度", "细粒度"]
-    }
-  ]
+    "output": [
+        {
+            "subject": [name, coarse_type, fine_type],
+            "relationship": "...",
+            "object": [name, coarse_type, fine_type]
+        },
+        ...
+    ]
 }
 
-Your output MUST strictly match this format.
-If no valid triples exist, output:
-
-{
-  "output": []
-}
-
-Output Requirements:
-- Only output JSON.
-- The ONLY valid top-level key is "output".
-- Absolutely DO NOT generate any other keys such as "entities", "triples", "ner", etc.
+Rules:
+- If no valid triples can be formed, return:
+  { "output": [] }
+- Do NOT invent entities or relationships not found in the sentence or the schema.
+- Keep all names exactly as they appear in the sentence.
 """
 
 one_shot_ner_paragraph = """{
@@ -91,7 +88,7 @@ one_shot_ner_output2 = """{
 
 few_shot = []
 few_shot.append([one_shot_ner_paragraph, one_shot_ner_output])
-few_shot.append([one_shot_ner_paragraph2, one_shot_ner_output2])
+# few_shot.append([one_shot_ner_paragraph2, one_shot_ner_output2])
 
 prompt_template = [
     {"role": "system", "content": ner_system},
@@ -101,4 +98,4 @@ for example_in, example_out in few_shot:
     prompt_template.append({"role": "user", "content": example_in})
     prompt_template.append({"role": "assistant", "content": example_out})
 
-# prompt_template.append({"role": "user", "content": "${passage}"})
+prompt_template.append({"role": "user", "content": "${passage}"})

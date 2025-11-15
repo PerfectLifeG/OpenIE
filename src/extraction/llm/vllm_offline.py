@@ -239,7 +239,7 @@ class VLLMOffline:
             max_tokens=max_tokens,
             # temperature=float(temp),
             # top_p=float(tp),
-            structured_outputs=structured_outputs_params
+            # structured_outputs=structured_outputs_params
         )
 
         # -----------------------------
@@ -259,7 +259,7 @@ class VLLMOffline:
             for messages in messages_list
         ]
 
-        for i, prompt in enumerate(all_prompts[:5]):
+        for i, prompt in enumerate(all_prompts[4:5]):
             print(f"Prompt {i}:\n{prompt}\n{'-' * 50}")
 
         # 调用 vLLM generate

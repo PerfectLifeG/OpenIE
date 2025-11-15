@@ -1,10 +1,9 @@
+import json
 import os
-import asyncio
-import importlib.util
+import importlib
 from string import Template
 from typing import Dict, List, Union, Any, Optional, Tuple
-from dataclasses import dataclass, field, asdict
-
+from dataclasses import dataclass, field
 
 from ..utils.logging_utils import get_logger
 
@@ -14,75 +13,48 @@ logger = get_logger(__name__)
 @dataclass
 class PromptTemplateManager:
     role_mapping: Dict[str, str] = field(
-        default_factory=lambda: {"system": "system", "user": "user", "assistant": "assistant"},
-        metadata={"help": "Mapping from default roles in prompte template files to specific LLM providers' defined roles."}
+        default_factory=lambda: {"system": "system", "user": "user", "assistant": "assistant"}
     )
     templates: Dict[str, Union[Template, List[Dict[str, Any]]]] = field(
-        init=False, 
-        default_factory=dict,
-        metadata={"help": "A dict from prompt template names to templates. A prompt template can be a Template instance or a chat history which is a list of dict with content as Template instance."}
+        init=False, default_factory=dict
     )
 
-    
     def __post_init__(self) -> None:
-        """
-        Initialize the templates directory and load templates.
-        """
-        # if self.templates_dir is None:
-        #     current_file_path = os.path.abspath(__file__)
-        #     package_dir = os.path.dirname(current_file_path)
-        #     self.templates_dir = os.path.join(package_dir, "templates")
         current_file_path = os.path.abspath(__file__)
         package_dir = os.path.dirname(current_file_path)
-        
-        # abs path to dir where each *.py file (exclude __init__.py) contains a variable prompt_template (a str or a chat history with content as raw str for being converted to a Template)
-        self.templates_dir = os.path.join(package_dir, "templates") 
-
+        self.templates_dir = os.path.join(package_dir, "templates")
         self._load_templates()
 
     def _load_templates(self) -> None:
-        """
-        Load all templates from Python scripts in the templates directory.
-        Only modules with `prompt_template` variable will be loaded.
-        """
         if not os.path.exists(self.templates_dir):
-            logger.error(f"Templates directory '{self.templates_dir}' does not exist.")
             raise FileNotFoundError(f"Templates directory '{self.templates_dir}' does not exist.")
-
         logger.info(f"Loading templates from directory: {self.templates_dir}")
+
         for filename in os.listdir(self.templates_dir):
             if filename.endswith(".py") and filename != "__init__.py":
                 script_name = os.path.splitext(filename)[0]
+                module_name = f"src.extraction.prompts.templates.{script_name}"
                 try:
-                    module_name = f"src.extraction.prompts.templates.{script_name}"
                     module = importlib.import_module(module_name)
-
                     if not hasattr(module, "prompt_template"):
-                        # 只记录信息，不报错
                         logger.info(f"Module '{module_name}' does not define a 'prompt_template', skipping.")
                         continue
-
                     prompt_template = module.prompt_template
-                    logger.debug(f"Loaded template from {module_name}")
 
                     if isinstance(prompt_template, Template):
                         self.templates[script_name] = prompt_template
                     elif isinstance(prompt_template, str):
                         self.templates[script_name] = Template(prompt_template)
                     elif isinstance(prompt_template, list) and all(
-                            isinstance(item, dict) and "role" in item and "content" in item for item in prompt_template
+                        isinstance(item, dict) and "role" in item and "content" in item for item in prompt_template
                     ):
                         for item in prompt_template:
                             item["role"] = self.role_mapping.get(item["role"], item["role"])
-                            item["content"] = item["content"] if isinstance(item["content"], Template) else Template(
-                                item["content"])
+                            if not isinstance(item["content"], Template):
+                                item["content"] = Template(item["content"])
                         self.templates[script_name] = prompt_template
                     else:
-                        raise TypeError(
-                            f"Invalid prompt_template format in '{module_name}.py'. Must be a Template or List[Dict]."
-                        )
-
-                    logger.debug(f"Successfully loaded template '{script_name}' from '{module_name}.py'.")
+                        raise TypeError(f"Invalid prompt_template format in '{module_name}.py'.")
 
                 except Exception as e:
                     logger.error(f"Failed to load template from '{module_name}.py': {e}")
@@ -91,135 +63,70 @@ class PromptTemplateManager:
     def build_chat_prompt(
             self,
             template_name: str,
-            new_passage: str,
-            few_shot: Optional[List[Tuple[str, str]]] = None,
-            extra_vars: Optional[Dict[str, Any]] = None
+            new_passage: Union[str, Dict[str, Any]],
+            few_shot: Optional[List[Tuple[Any, Any]]] = None,
+            extra_vars: Optional[Dict[str, Any]] = None,
+            max_few_shot: int = 3
     ) -> List[Dict[str, Any]]:
+        """
+        构建 chat-style prompt：
+        1. system 模板
+        2. few-shot 示例
+        3. 当前 passage
+
+        Args:
+            template_name: 模板名称
+            new_passage: 当前文本（字符串或 dict）
+            few_shot: 动态 few-shot 示例 [(example_input, example_output)]
+            extra_vars: 模板里额外占位符
+            max_few_shot: 每条 prompt 最多 few-shot 数量
+
+        Returns:
+            List[Dict[str, Any]]: 可直接传给 Chat 模型的消息列表
+        """
         extra_vars = extra_vars or {}
-        # 自动加入 passage
-        extra_vars = {"passage": new_passage, **extra_vars}
+        # passage 保证是字符串
+        passage_content = (
+            new_passage if isinstance(new_passage, str)
+            else json.dumps(new_passage, ensure_ascii=False)
+        )
+        extra_vars["passage"] = passage_content
 
         template = self.get_template(template_name)
-        prompt_list = []
+        prompt_list: List[Dict[str, Any]] = []
 
+        # --- 1. system 消息 ---
         if isinstance(template, list):
             for msg in template:
                 content = msg["content"]
+                if isinstance(content, dict):
+                    content = json.dumps(content, ensure_ascii=False, indent=2)
                 if isinstance(content, Template):
                     content = content.substitute(**extra_vars)
-                prompt_list.append({"role": msg["role"], "content": content})
+                prompt_list.append({"role": msg["role"], "content": content+'\n'})
         elif isinstance(template, Template):
-            prompt_list.append({"role": "system", "content": template.substitute(**extra_vars)})
+            prompt_list.append({"role": "system", "content": template.substitute(**extra_vars)+'\n'})
         else:
             raise TypeError(f"Unsupported template type: {type(template)}")
 
-        # 插入 few-shot
+        # --- 2. few-shot 示例插入 ---
         if few_shot:
-            for example_in, example_out in few_shot:
+            for example_in, example_out in few_shot[:max_few_shot]:
+                if isinstance(example_in, dict):
+                    example_in = json.dumps(example_in, ensure_ascii=False, indent=2)
+                if isinstance(example_out, dict):
+                    example_out = json.dumps(example_out, ensure_ascii=False, indent=2)
                 prompt_list.append({"role": "user", "content": example_in})
                 prompt_list.append({"role": "assistant", "content": example_out})
 
-        # 不用再手动插入 passage，因为 extra_vars 已经包含了
-        if not any(msg["content"] == "${passage}" for msg in prompt_list):
-            passage_content = Template("${passage}").substitute(**extra_vars)
-            prompt_list.append({"role": "user", "content": passage_content})
+        # --- 3. 当前 passage ---
+        if isinstance(new_passage, dict):
+            passage_content = json.dumps(new_passage, ensure_ascii=False, indent=2)
+        prompt_list.append({"role": "user", "content": passage_content+'\n'})
 
         return prompt_list
 
-    def render(self, name: str, **kwargs) -> Union[str, List[Dict[str, Any]]]:
-        """
-        Render a template with the provided variables.
-
-        Args:
-            name (str): The name of the template.
-            kwargs: Placeholder values for the template.
-
-        Returns:
-            Union[str, List[Dict[str, Any]]]: The rendered template or chat history.
-
-        Raises:
-            ValueError: If a required variable is missing.
-        """
-        template = self.get_template(name)
-        if isinstance(template, Template):
-            # Render a single string template
-            try:
-                result = template.substitute(**kwargs)
-                logger.debug(f"Successfully rendered template '{name}' with variables: {kwargs}.")
-                return result
-            except KeyError as e:
-                logger.error(f"Missing variable for template '{name}': {e}")
-                raise ValueError(f"Missing variable for template '{name}': {e}")
-        elif isinstance(template, list):
-            # Render a chat history
-            try:
-                rendered_list = [
-                    {"role": item["role"], "content": item["content"].substitute(**kwargs)}
-                    for item in template
-                ]
-                logger.debug(f"Successfully rendered chat history template '{name}' with variables: {kwargs}.")
-                return rendered_list
-            except KeyError as e:
-                logger.error(f"Missing variable in chat history template '{name}': {e}")
-                raise ValueError(f"Missing variable in chat history template '{name}': {e}")
-    
-    def sync_render(self, name: str, **kwargs) -> Union[str, List[Dict[str, Any]]]:
-        return asyncio.run(self.render(name, **kwargs))
-
-    def list_template_names(self) -> List[str]:
-        """
-        List all available template names.
-
-        Returns:
-            List[str]: A list of template names.
-        """
-        logger.info("Listing all available template names.")
-        
-        return list(self.templates.keys())
-
     def get_template(self, name: str) -> Union[Template, List[Dict[str, Any]]]:
-        """
-        Retrieve a template by name.
-
-        Args:
-            name (str): The name of the template.
-
-        Returns:
-            Union[Template, List[Dict[str, Any]]]: The requested template.
-
-        Raises:
-            KeyError: If the template is not found.
-        """
         if name not in self.templates:
-            logger.error(f"Template '{name}' not found.")
             raise KeyError(f"Template '{name}' not found.")
-        logger.debug(f"Retrieved template '{name}'.")
-        
         return self.templates[name]
-    
-    def print_template(self, name: str) -> None:
-        """
-        Print the prompt template string or chat history structure for the given template name.
-
-        Args:
-            name (str): The name of the template.
-
-        Raises:
-            KeyError: If the template is not found.
-        """
-        try:
-            template = self.get_template(name)
-            print(f"Template name: {name}")
-            if isinstance(template, Template):
-                print(template.template)
-            elif isinstance(template, list):
-                for item in template:
-                    print(f"Role: {item['role']}, Content: {item['content']}")
-            logger.info(f"Printed template '{name}'.")
-        except KeyError as e:
-            logger.error(f"Failed to print template '{name}': {e}")
-            raise
-    
-    
-    def is_template_name_valid(self, name: str) -> bool:
-        return name in self.templates

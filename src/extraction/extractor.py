@@ -29,7 +29,7 @@ from tqdm import tqdm
 def extractor(dataset: str, mode, temp, tp):
     if mode == 1:
         llm_name = '/home/penglin.ge/data/huggingface/model/Llama-3.1-8B-Instruct'
-        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model_32_3_f'
+        llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/model_32_5_f'
     elif mode == 2:
         llm_name = '/home/penglin.ge/code/DoRA/commonsense_reasoning/Qwen_model2'
     else:

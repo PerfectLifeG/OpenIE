@@ -246,5 +246,6 @@ def evaluate_ner(dev_gold_path: str, pred_path: str,
 
 if __name__ == '__main__':
     data_path = '/home/penglin.ge/code/OpenIE/data/dev2.json'
-    save_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/openIE__home_penglin.ge_code_DoRA_commonsense_reasoning_model_32_3_f.json'
+    save_path = '/home/penglin.ge/code/OpenIE/outputs/dev2/openIE__home_penglin.ge_code_DoRA_commonsense_reasoning_model_32_5_f.json'
+    print(save_path[-20:])
     print(evaluate_ner(data_path, save_path, strict=True))

@@ -1,110 +1,46 @@
-ner_system = (
-    "You are an expert in joint entity and relation extraction. "
-    "Given a sentence, coarse_types, and a schema, extract only entities that can participate in the schema and match the coarse_types. "
-    "Predict the fine_type of these entities, then form triples (subject, relationship, object) using them. "
-    "Output in JSON, with each subject/object as [name, coarse_type, fine_type], and relationship from the schema."
-)
+ner_system = """You are an expert in joint entity and relation extraction.
 
-one_shot_ner_paragraph = """{
-    "sentence": "They and Mr. Jara shared a cramped railroad-style apartment in the Bushwick neighborhood of Brooklyn .",
-    "schema": [
-      "company shareholder among major shareholders",
-      "location contains"
-    ],
-    "coarse_types": [
-      "organization",
-      "location",
-      "medicine",
-      "mathematics"
-    ]
+Your task:
+Given a sentence, a list of coarse_types, and a schema, extract only the entities that:
+1) can participate in the schema, and  
+2) match the allowed coarse_types.
+
+For each extracted entity:
+- Predict its fine_type.
+- Use the extracted entities to form (subject, relationship, object) triples.
+- The "relationship" MUST be chosen strictly from the given schema.
+- Each subject and object MUST be represented strictly as:  
+  [name, coarse_type, fine_type]
+
+Output Requirements:
+- Only output JSON.
+- The ONLY valid top-level key is "output".
+- Absolutely DO NOT generate any other keys such as "entities", "triples", "ner", etc.
+- The output must follow EXACTLY this structure:
+
+Example format:
+{
+  "output": [
+    {
+      "subject": ["[Entity1]", "[CoarseType]", "[FineType]"],
+      "relationship": "[Relationship]",
+      "object": ["[Entity2]", "[CoarseType]", "[FineType]"]
+    }
+  ]
 }
+
+- If no valid triples exist, output exactly:
+{
+  "output": []
+}
+
+Strict rules:
+- Do not generate any explanations, comments, or any text outside the JSON
+- Ensure the JSON is syntactically valid
+- Only include entities and relationships allowed by the schema and coarse_types
 """
 
-one_shot_ner_output = """{
-    "output": [
-      {
-        "subject": [
-          "Brooklyn",
-          "location",
-          "district"
-        ],
-        "relationship": "location contains",
-        "object": [
-          "Bushwick",
-          "location",
-          "facility"
-        ]
-      }
-    ]
-}
-"""
-
-one_shot_ner_paragraph2 = """{
-    "sentence": "Roblin  was a candidate in  Winnipeg  South Centre for the 1968 federal election but lost to Liberal E.B. Osler by over votes .",
-    "schema": [
-      "spouse",
-      "countries of residence",
-      "country of birth",
-      "state or provinces of residence"
-    ],
-    "coarse_types": [
-      "organization"
-    ]
-}
-"""
-
-one_shot_ner_output2 = """{
-    "output": []
-}
-"""
-
-one_shot_ner_paragraph3 = """{
-    "sentence": "杰里·贝勒斯（Jerryd Bayless），1988年8月20日出生于美国亚利桑那州菲尼克斯（Phoenix, Arizona），美国职业篮球运动员，司职后卫，效力于NBA费城76人队",
-    "schema": [
-      "丈夫",
-      "朝代",
-      "祖籍",
-      "国籍"
-    ],
-    "coarse_types": [
-      "人",
-      "产品",
-      "位置",
-      "时间",
-      "组织机构"
-    ]
-}
-"""
-
-one_shot_ner_output3 = """{
-    "output": [
-      {
-        "subject": [
-          "杰里·贝勒斯",
-          "人",
-          "运动员"
-        ],
-        "relationship": "国籍",
-        "object": [
-          "美国",
-          "位置",
-          "国家"
-        ]
-      }
-    ]
-}
-"""
-
-few_shot = []
-few_shot.append([one_shot_ner_paragraph, one_shot_ner_output])
-few_shot.append([one_shot_ner_paragraph2, one_shot_ner_output2])
 
 prompt_template = [
     {"role": "system", "content": ner_system},
 ]
-
-for example_in, example_out in few_shot:
-    prompt_template.append({"role": "user", "content": example_in})
-    prompt_template.append({"role": "assistant", "content": example_out})
-
-prompt_template.append({"role": "user", "content": "${passage}"})
